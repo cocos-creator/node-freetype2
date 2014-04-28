@@ -4,7 +4,10 @@
   "description": "Parse font files with FreeType.",
   "main": "build/Release/freetype2",
   "scripts": {
-    "test": "jasmine-node spec"
+    "test": "jasmine-node spec",
+    "build": "node-gyp build",
+    "rebuild": "node-gyp rebuild",
+    "example": "node example/index.js example/Arial.ttf"
   },
   "repository": {
     "type": "git",

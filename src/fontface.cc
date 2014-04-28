@@ -41,6 +41,8 @@ NAN_METHOD(FontFace::New) {
 Handle<Value> FontFace::NewInstance(_NAN_METHOD_ARGS_TYPE args) {
   NanScope();
 
+
+
   const unsigned argc = 1;
   Handle<Value> argv[argc] = { args[0] };
   Local<Object> instance = NanPersistentToLocal(constructor)->NewInstance(argc, argv);
@@ -69,7 +71,6 @@ void FontFace::SetObjectProperties(Handle<Object> obj) {
 
   // obj->Set(String::NewSymbol("generic"), Integer::New(this->face->generic));
 
-
   obj->Set(String::NewSymbol("units_per_EM"), Integer::New(this->face->units_per_EM));
   // obj->Set(String::NewSymbol("bbox"), Integer::New(this->face->bbox));
 
@@ -85,10 +86,71 @@ void FontFace::SetObjectProperties(Handle<Object> obj) {
 
   std::vector<FT_UInt> acv = this->AvailableCharacters();
   Local<Array> aca = Array::New(acv.size());
+  
+
+  FT_ULong chrCode;
   for (size_t i = 0; i < acv.size(); i++) {
-    aca->Set(i, Integer::New(acv.at(i)));
+    chrCode = acv.at(i);
+    aca->Set(i, Integer::New(chrCode));
+
+    
+
   }
   obj->Set(String::NewSymbol("available_characters"), aca);
+
+  FT_Error err = FT_Set_Char_Size(this->face, 100, 100, 1000, 1000);
+  // FT_Error err = FT_Set_Pixel_Sizes(this->face, 100, 100);
+  if (FT_HAS_KERNING(this->face) && !err) {
+    std::vector< Local<Object> > pairs = this->Kernings( acv );
+    Local<Array> kernArray = Array::New(pairs.size());
+
+    Local<Object> pair;
+    for (size_t i = 0; i < pairs.size(); i++) {
+      pair = pairs.at(i);
+      kernArray->Set(i, pair);
+    }
+    obj->Set(String::NewSymbol("kerning"), kernArray);
+  }
+}
+
+std::vector< Local<Object> > FontFace::Kernings( std::vector<FT_UInt> acv ) {
+  std::vector< Local<Object> > kernPairs;
+
+  FT_ULong chrIndex;
+  FT_ULong chrCode;
+  FT_ULong otherIndex;
+  FT_ULong otherCode;
+  for (size_t i = 0; i < acv.size(); i++) {
+    chrCode = acv.at(i);
+    chrIndex = FT_Get_Char_Index(this->face, chrCode);
+
+    if (chrCode < 32 || chrCode > 127)
+      continue;
+
+    for (size_t j = 0; j < acv.size(); j++) {
+      otherCode = acv.at(j);
+
+      if (chrCode < 32 || chrCode > 127)
+        continue;
+
+      
+      otherIndex = FT_Get_Char_Index(this->face, otherCode);
+      
+      FT_Vector kerning;
+      FT_Error error = FT_Get_Kerning(this->face, chrIndex, otherIndex, FT_KERNING_UNSCALED, &kerning);
+
+      if (error || kerning.x == 0) 
+        continue;
+
+      Local<Object> obj = Object::New();
+      obj->Set(NanSymbol("left"), Integer::New(chrCode));
+      obj->Set(NanSymbol("right"), Integer::New(otherCode));
+      obj->Set(NanSymbol("value"), Integer::New(kerning.x));
+      kernPairs.push_back( obj );
+    }
+  }
+
+  return kernPairs;
 }
 
 std::vector<FT_UInt> FontFace::AvailableCharacters() {

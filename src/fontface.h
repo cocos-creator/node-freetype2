@@ -25,6 +25,7 @@ class FontFace : public node::ObjectWrap {
     static FT_Library library;
     void SetObjectProperties(Handle<Object> obj);
     std::vector<FT_UInt> AvailableCharacters();
+    std::vector< Local<Object> > Kernings( std::vector<FT_UInt> chars );
 };
 
 #endif
