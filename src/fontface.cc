@@ -92,14 +92,14 @@ void FontFace::SetObjectProperties(Handle<Object> obj) {
   for (size_t i = 0; i < acv.size(); i++) {
     chrCode = acv.at(i);
     aca->Set(i, Integer::New(chrCode));
-
-    
-
   }
   obj->Set(String::NewSymbol("available_characters"), aca);
 
+
+  //Typeface.js takes the approach of using a fixed character size,
+  //and then calculating 
   FT_Error err = FT_Set_Char_Size(this->face, 100, 100, 1000, 1000);
-  // FT_Error err = FT_Set_Pixel_Sizes(this->face, 100, 100);
+
   if (FT_HAS_KERNING(this->face) && !err) {
     std::vector< Local<Object> > pairs = this->Kernings( acv );
     Local<Array> kernArray = Array::New(pairs.size());
@@ -124,20 +124,20 @@ std::vector< Local<Object> > FontFace::Kernings( std::vector<FT_UInt> acv ) {
     chrCode = acv.at(i);
     chrIndex = FT_Get_Char_Index(this->face, chrCode);
 
-    if (chrCode < 32 || chrCode > 127)
-      continue;
+    // if (chrCode < 32 || chrCode > 127)
+    //   continue;
 
     for (size_t j = 0; j < acv.size(); j++) {
       otherCode = acv.at(j);
 
-      if (chrCode < 32 || chrCode > 127)
-        continue;
+      // if (chrCode < 32 || chrCode > 127)
+      //   continue;
 
       
       otherIndex = FT_Get_Char_Index(this->face, otherCode);
       
       FT_Vector kerning;
-      FT_Error error = FT_Get_Kerning(this->face, chrIndex, otherIndex, FT_KERNING_UNSCALED, &kerning);
+      FT_Error error = FT_Get_Kerning(this->face, chrIndex, otherIndex, FT_KERNING_DEFAULT, &kerning);
 
       if (error || kerning.x == 0) 
         continue;
