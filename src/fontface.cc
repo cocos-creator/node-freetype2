@@ -133,7 +133,7 @@ std::vector< Local<Object> > FontFace::Kernings( std::vector<FT_UInt> acv ) {
       otherIndex = FT_Get_Char_Index(this->face, otherCode);
       
       FT_Vector kerning;
-      FT_Error error = FT_Get_Kerning(this->face, chrIndex, otherIndex, FT_KERNING_DEFAULT, &kerning);
+      FT_Error error = FT_Get_Kerning(this->face, chrIndex, otherIndex, FT_KERNING_UNSCALED, &kerning);
 
       if (error || kerning.x == 0) 
         continue;
