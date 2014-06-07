@@ -2,6 +2,8 @@
 #include "FontFace.h"
 #include "ftglyph.h"
 #include "ftoutln.h"
+#include "ftsnames.h"
+#include "ttnameid.h"
 
 void FreeType2::Init(v8::Handle<v8::Object> exports) {
   NanScope();
@@ -35,7 +37,9 @@ void FreeType2::Init(v8::Handle<v8::Object> exports) {
   NODE_SET_METHOD(exports, "Get_First_Char", Get_First_Char);
   NODE_SET_METHOD(exports, "Get_Next_Char", Get_Next_Char);
   NODE_SET_METHOD(exports, "Outline_Decompose", Outline_Decompose);
-
+  NODE_SET_METHOD(exports, "Get_Sfnt_Name_Count", Get_Sfnt_Name_Count);
+  NODE_SET_METHOD(exports, "Get_Sfnt_Name", Get_Sfnt_Name);
+  NODE_SET_METHOD(exports, "Get_Sfnt_Full_Name", Get_Sfnt_Full_Name);
   
   // NODE_SET_METHOD(exports, "Get_Name_Index", Get_Name_Index);
   // NODE_SET_METHOD(exports, "Get_SubGlyph_Info", Get_SubGlyph_Info);
@@ -304,6 +308,101 @@ NAN_METHOD(FreeType2::Outline_Decompose) {
     NanReturnValue(v8::Integer::New(outErr));
   }
 }
+
+NAN_METHOD(FreeType2::Get_Sfnt_Name_Count) {
+  NanScope();
+  if (args.Length() < 1) {
+    NanReturnNull();
+    return;
+  }
+  FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
+  NanReturnValue(v8::Integer::New(FT_Get_Sfnt_Name_Count(fontFace->ftFace)));
+}
+
+NAN_METHOD(FreeType2::Get_Sfnt_Name) {
+  NanScope();
+  if (args.Length() < 2) {
+    NanReturnNull();
+    return;
+  }
+  FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
+  int index = args[1]->Int32Value();
+  FT_SfntName data;
+  if (FT_Get_Sfnt_Name(fontFace->ftFace, index, &data) == FT_Err_Ok) {
+    v8::Local<v8::String> name = v8::String::NewFromOneByte(v8::Isolate::GetCurrent(), 
+                                                            data.string, 
+                                                            v8::String::NewStringType::kNormalString, 
+                                                            data.string_len);
+
+    v8::Handle<v8::Object> retval = v8::Object::New();
+    retval->Set(v8::String::New("platform_id"), v8::Number::New(data.platform_id));
+    retval->Set(v8::String::New("encoding_id"), v8::Number::New(data.encoding_id));
+    retval->Set(v8::String::New("language_id"), v8::Number::New(data.language_id));
+    retval->Set(v8::String::New("name_id"), v8::Number::New(data.name_id));
+    retval->Set(v8::String::New("string"), name);
+    NanReturnValue(retval);
+  }
+  NanReturnNull();
+}
+
+NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
+  NanScope();
+  if (args.Length() < 3) {
+    NanReturnNull();
+    return;
+  }
+  FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
+  int platformId = args[1]->Int32Value();
+  int languageId = args[2]->Int32Value();
+  FT_SfntName data;
+  int nameCount = FT_Get_Sfnt_Name_Count(fontFace->ftFace);
+  for (int i = 0; i < nameCount; ++i) {
+    if (FT_Get_Sfnt_Name(fontFace->ftFace, i, &data) == FT_Err_Ok && data.name_id == TT_NAME_ID_FULL_NAME
+                                                                  && data.language_id == languageId) {
+      bool isUcs2be = data.string_len % 2 == 0
+                    && ( (data.platform_id == TT_PLATFORM_APPLE_UNICODE && data.encoding_id <= TT_APPLE_ID_UNICODE_2_0)
+                      || (data.platform_id == TT_PLATFORM_MICROSOFT && data.encoding_id == TT_MS_ID_UNICODE_CS)
+                      || (data.platform_id == TT_PLATFORM_ISO && data.encoding_id == TT_ISO_ID_10646)
+                       );
+      if (isUcs2be) {
+        // convert to little endian
+        for (int i = 0; i < data.string_len; i += 2) {
+          FT_Byte c = data.string[i];
+          data.string[i] = data.string[i + 1];
+          data.string[i + 1] = c;
+        }
+        v8::Local<v8::String> name = v8::String::NewFromOneByte(v8::Isolate::GetCurrent(), 
+                                                                data.string, 
+                                                                v8::String::NewStringType::kNormalString, 
+                                                                data.string_len);
+        v8::Handle<v8::Object> retval = v8::Object::New();
+        retval->Set(v8::String::New("encoding"), v8::String::New("ucs2"));
+        retval->Set(v8::String::New("name"), name);
+        NanReturnValue(retval);
+        return;
+      }
+
+      bool isAscii = (data.platform_id == TT_PLATFORM_MACINTOSH && data.encoding_id == TT_MAC_ID_ROMAN)
+                  || (data.platform_id == TT_PLATFORM_ISO && (data.encoding_id == TT_ISO_ID_7BIT_ASCII || data.encoding_id == TT_ISO_ID_8859_1));
+      if (isAscii) {
+        v8::Local<v8::String> name = v8::String::NewFromOneByte(v8::Isolate::GetCurrent(), 
+                                                                data.string, 
+                                                                v8::String::NewStringType::kNormalString, 
+                                                                data.string_len);
+        v8::Handle<v8::Object> retval = v8::Object::New();
+        retval->Set(v8::String::New("encoding"), v8::String::New("ascii"));
+        retval->Set(v8::String::New("name"), name);
+        NanReturnValue(retval);
+        return;
+      }
+    }
+  }
+  // unsupported encoding
+  NanReturnNull();
+}
+
+
+
 
 int FreeType2::move_to(const FT_Vector* to, void *p) {
   OutlineContext *context = (OutlineContext*)p;
