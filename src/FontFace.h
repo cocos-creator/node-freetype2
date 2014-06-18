@@ -6,6 +6,8 @@
 
 #include <vector>
 
+// http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_FaceRec
+
 class FontFace : public node::ObjectWrap {
   public:
     explicit FontFace();
@@ -39,7 +41,7 @@ class FontFace : public node::ObjectWrap {
     static NAN_GETTER(acc_underline_position);
     static NAN_GETTER(acc_underline_thickness);
     static NAN_GETTER(acc_glyph);
-    // static NAN_GETTER(acc_size);
+    static NAN_GETTER(acc_size);
     // static NAN_GETTER(acc_charmap);
 
 };

@@ -28,7 +28,7 @@ void FontFace::Init(v8::Handle<v8::Object> exports) {
   constructorObjectTemplate->SetAccessor(NanSymbol("underline_position"), acc_underline_position);
   constructorObjectTemplate->SetAccessor(NanSymbol("underline_thickness"), acc_underline_thickness);
   constructorObjectTemplate->SetAccessor(NanSymbol("glyph"), acc_glyph);
-  // constructorObjectTemplate->SetAccessor(NanSymbol("size"), acc_size);
+  constructorObjectTemplate->SetAccessor(NanSymbol("size"), acc_size);
   // constructorObjectTemplate->SetAccessor(NanSymbol("charmap"), acc_charmap);
   constructorObjectTemplate->SetInternalFieldCount(1);
 
@@ -200,4 +200,22 @@ NAN_GETTER(FontFace::acc_glyph) {
   Glyph* glyph = node::ObjectWrap::Unwrap<Glyph>(glyphObj);
   glyph->ftGlyph = fontFace->ftFace->glyph;
   NanReturnValue(glyphObj);
+}
+
+NAN_GETTER(FontFace::acc_size) {
+	NanScope();
+	FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
+	FT_Size_Metrics metrics = fontFace->ftFace->size->metrics;
+	v8::Handle<v8::Object> retval = v8::Object::New();
+
+	retval->Set(NanSymbol("x_ppem"), v8::Integer::New(metrics.x_ppem));
+	retval->Set(NanSymbol("y_ppem"), v8::Integer::New(metrics.y_ppem));
+	retval->Set(NanSymbol("x_scale"), v8::Number::New(metrics.x_scale / (float)(1 << 16)));
+	retval->Set(NanSymbol("y_scale"), v8::Number::New(metrics.y_scale / (float)(1 << 16)));
+	retval->Set(NanSymbol("ascender"), v8::Number::New(metrics.ascender / (float)(1 << 6)));
+	retval->Set(NanSymbol("descender"), v8::Number::New(metrics.descender / (float)(1 << 6)));
+	retval->Set(NanSymbol("height"), v8::Number::New(metrics.height / (float)(1 << 6)));
+	retval->Set(NanSymbol("max_advance"), v8::Number::New(metrics.max_advance / (float)(1 << 6)));
+
+	NanReturnValue(retval);
 }

@@ -335,11 +335,11 @@ NAN_METHOD(FreeType2::Get_Sfnt_Name) {
                                                             data.string_len);
 
     v8::Handle<v8::Object> retval = v8::Object::New();
-    retval->Set(v8::String::New("platform_id"), v8::Number::New(data.platform_id));
-    retval->Set(v8::String::New("encoding_id"), v8::Number::New(data.encoding_id));
-    retval->Set(v8::String::New("language_id"), v8::Number::New(data.language_id));
-    retval->Set(v8::String::New("name_id"), v8::Number::New(data.name_id));
-    retval->Set(v8::String::New("string"), name);
+    retval->Set(NanSymbol("platform_id"), v8::Integer::New(data.platform_id));
+    retval->Set(NanSymbol("encoding_id"), v8::Integer::New(data.encoding_id));
+    retval->Set(NanSymbol("language_id"), v8::Integer::New(data.language_id));
+    retval->Set(NanSymbol("name_id"), v8::Integer::New(data.name_id));
+    retval->Set(NanSymbol("string"), name);
     NanReturnValue(retval);
   }
   NanReturnNull();
