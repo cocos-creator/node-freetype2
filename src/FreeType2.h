@@ -27,7 +27,7 @@ class FreeType2 : public node::ObjectWrap {
     static NAN_METHOD(Select_Size);
     static NAN_METHOD(Request_Size);
     static NAN_METHOD(Set_Char_Size);
-    // static NAN_METHOD(Set_Pixel_Sizes);
+    static NAN_METHOD(Set_Pixel_Sizes);
     static NAN_METHOD(Load_Glyph);
     static NAN_METHOD(Load_Char);
     // static NAN_METHOD(Set_Transform);

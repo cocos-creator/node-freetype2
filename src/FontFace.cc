@@ -203,19 +203,19 @@ NAN_GETTER(FontFace::acc_glyph) {
 }
 
 NAN_GETTER(FontFace::acc_size) {
-	NanScope();
-	FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-	FT_Size_Metrics metrics = fontFace->ftFace->size->metrics;
-	v8::Handle<v8::Object> retval = v8::Object::New();
-
-	retval->Set(NanSymbol("x_ppem"), v8::Integer::New(metrics.x_ppem));
-	retval->Set(NanSymbol("y_ppem"), v8::Integer::New(metrics.y_ppem));
-	retval->Set(NanSymbol("x_scale"), v8::Number::New(metrics.x_scale / (float)(1 << 16)));
-	retval->Set(NanSymbol("y_scale"), v8::Number::New(metrics.y_scale / (float)(1 << 16)));
-	retval->Set(NanSymbol("ascender"), v8::Number::New(metrics.ascender / (float)(1 << 6)));
-	retval->Set(NanSymbol("descender"), v8::Number::New(metrics.descender / (float)(1 << 6)));
-	retval->Set(NanSymbol("height"), v8::Number::New(metrics.height / (float)(1 << 6)));
-	retval->Set(NanSymbol("max_advance"), v8::Number::New(metrics.max_advance / (float)(1 << 6)));
-
-	NanReturnValue(retval);
+  NanScope();
+  FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
+  FT_Size_Metrics metrics = fontFace->ftFace->size->metrics;
+  v8::Handle<v8::Object> retval = v8::Object::New();
+  
+  retval->Set(NanSymbol("x_ppem"), v8::Integer::New(metrics.x_ppem));
+  retval->Set(NanSymbol("y_ppem"), v8::Integer::New(metrics.y_ppem));
+  retval->Set(NanSymbol("x_scale"), v8::Number::New(metrics.x_scale / (float)(1 << 16)));
+  retval->Set(NanSymbol("y_scale"), v8::Number::New(metrics.y_scale / (float)(1 << 16)));
+  retval->Set(NanSymbol("ascender"), v8::Number::New(metrics.ascender / (float)(1 << 6)));
+  retval->Set(NanSymbol("descender"), v8::Number::New(metrics.descender / (float)(1 << 6)));
+  retval->Set(NanSymbol("height"), v8::Number::New(metrics.height / (float)(1 << 6)));
+  retval->Set(NanSymbol("max_advance"), v8::Number::New(metrics.max_advance / (float)(1 << 6)));
+  
+  NanReturnValue(retval);
 }

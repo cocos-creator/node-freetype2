@@ -21,7 +21,7 @@ void FreeType2::Init(v8::Handle<v8::Object> exports) {
   NODE_SET_METHOD(exports, "Select_Size", Select_Size);
   NODE_SET_METHOD(exports, "Request_Size", Request_Size);
   NODE_SET_METHOD(exports, "Set_Char_Size", Set_Char_Size);
-  // NODE_SET_METHOD(exports, "Set_Pixel_Sizes", Set_Pixel_Sizes);
+  NODE_SET_METHOD(exports, "Set_Pixel_Sizes", Set_Pixel_Sizes);
   NODE_SET_METHOD(exports, "Load_Glyph", Load_Glyph);
   NODE_SET_METHOD(exports, "Load_Char", Load_Char);
   // NODE_SET_METHOD(exports, "Set_Transform", Set_Transform);
@@ -192,6 +192,13 @@ NAN_METHOD(FreeType2::Set_Char_Size) {
                    args[2]->Int32Value(),
                    args[3]->Int32Value(),
                    args[4]->Int32Value());
+  NanReturnUndefined();
+}
+
+NAN_METHOD(FreeType2::Set_Pixel_Sizes) {
+  NanScope();
+  FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
+  FT_Set_Pixel_Sizes(fontFace->ftFace, args[1]->Uint32Value(), args[2]->Uint32Value());
   NanReturnUndefined();
 }
 
