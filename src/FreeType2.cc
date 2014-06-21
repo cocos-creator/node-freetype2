@@ -236,8 +236,8 @@ NAN_METHOD(FreeType2::Load_Char) {
     return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
-  FT_Load_Char(fontFace->ftFace, args[1]->Int32Value(), args[2]->Int32Value());
-  NanReturnUndefined();
+  FT_Error err = FT_Load_Char(fontFace->ftFace, args[1]->Int32Value(), args[2]->Int32Value());
+  NanReturnValue(v8::Integer::New(err));
 }
 
 NAN_METHOD(FreeType2::Get_Kerning) {
