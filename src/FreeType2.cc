@@ -170,7 +170,7 @@ NAN_METHOD(FreeType2::Select_Size) {
     return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
-  FT_Select_Size(fontFace->ftFace, args[0]->Int32Value());
+  FT_Select_Size(fontFace->ftFace, args[1]->Int32Value());
   NanReturnUndefined();
 }
 
