@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/ericfreese/node-freetype2",
   "dependencies": {
-    "nan": "~0.8"
+    "nan": "~1.2"
   },
   "devDependencies": {
     "jasmine-node": "~1.14",

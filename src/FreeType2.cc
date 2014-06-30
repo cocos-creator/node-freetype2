@@ -15,7 +15,7 @@ void FreeType2::Init(v8::Handle<v8::Object> exports) {
 
   char version[32];
   sprintf(version, "%i.%i.%i", FREETYPE_MAJOR, FREETYPE_MINOR, FREETYPE_PATCH);
-  exports->Set(NanSymbol("version"), NanSymbol(version));
+  exports->Set(NanNew<v8::String>("version"), NanNew<v8::String>(version));
 
   NODE_SET_METHOD(exports, "New_Memory_Face", New_Memory_Face);
   NODE_SET_METHOD(exports, "Select_Size", Select_Size);
@@ -45,104 +45,104 @@ void FreeType2::Init(v8::Handle<v8::Object> exports) {
   // NODE_SET_METHOD(exports, "Get_SubGlyph_Info", Get_SubGlyph_Info);
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_Encoding
-  exports->Set(NanSymbol("ENCODING_NONE"), v8::Integer::New(FT_ENCODING_NONE));
-  exports->Set(NanSymbol("ENCODING_MS_SYMBOL"), v8::Integer::New(FT_ENCODING_MS_SYMBOL));
-  exports->Set(NanSymbol("ENCODING_UNICODE"), v8::Integer::New(FT_ENCODING_UNICODE));
-  exports->Set(NanSymbol("ENCODING_SJIS"), v8::Integer::New(FT_ENCODING_SJIS));
-  exports->Set(NanSymbol("ENCODING_GB2312"), v8::Integer::New(FT_ENCODING_GB2312));
-  exports->Set(NanSymbol("ENCODING_BIG5"), v8::Integer::New(FT_ENCODING_BIG5));
-  exports->Set(NanSymbol("ENCODING_WANSUNG"), v8::Integer::New(FT_ENCODING_WANSUNG));
-  exports->Set(NanSymbol("ENCODING_JOHAB"), v8::Integer::New(FT_ENCODING_JOHAB));
-  exports->Set(NanSymbol("ENCODING_ADOBE_STANDARD"), v8::Integer::New(FT_ENCODING_ADOBE_STANDARD));
-  exports->Set(NanSymbol("ENCODING_ADOBE_EXPERT"), v8::Integer::New(FT_ENCODING_ADOBE_EXPERT));
-  exports->Set(NanSymbol("ENCODING_ADOBE_CUSTOM"), v8::Integer::New(FT_ENCODING_ADOBE_CUSTOM));
-  exports->Set(NanSymbol("ENCODING_ADOBE_LATIN_1"), v8::Integer::New(FT_ENCODING_ADOBE_LATIN_1));
-  exports->Set(NanSymbol("ENCODING_OLD_LATIN_2"), v8::Integer::New(FT_ENCODING_OLD_LATIN_2));
-  exports->Set(NanSymbol("ENCODING_APPLE_ROMAN"), v8::Integer::New(FT_ENCODING_APPLE_ROMAN));
+  exports->Set(NanNew<v8::String>("ENCODING_NONE"), NanNew<v8::Integer>(FT_ENCODING_NONE));
+  exports->Set(NanNew<v8::String>("ENCODING_MS_SYMBOL"), NanNew<v8::Integer>(FT_ENCODING_MS_SYMBOL));
+  exports->Set(NanNew<v8::String>("ENCODING_UNICODE"), NanNew<v8::Integer>(FT_ENCODING_UNICODE));
+  exports->Set(NanNew<v8::String>("ENCODING_SJIS"), NanNew<v8::Integer>(FT_ENCODING_SJIS));
+  exports->Set(NanNew<v8::String>("ENCODING_GB2312"), NanNew<v8::Integer>(FT_ENCODING_GB2312));
+  exports->Set(NanNew<v8::String>("ENCODING_BIG5"), NanNew<v8::Integer>(FT_ENCODING_BIG5));
+  exports->Set(NanNew<v8::String>("ENCODING_WANSUNG"), NanNew<v8::Integer>(FT_ENCODING_WANSUNG));
+  exports->Set(NanNew<v8::String>("ENCODING_JOHAB"), NanNew<v8::Integer>(FT_ENCODING_JOHAB));
+  exports->Set(NanNew<v8::String>("ENCODING_ADOBE_STANDARD"), NanNew<v8::Integer>(FT_ENCODING_ADOBE_STANDARD));
+  exports->Set(NanNew<v8::String>("ENCODING_ADOBE_EXPERT"), NanNew<v8::Integer>(FT_ENCODING_ADOBE_EXPERT));
+  exports->Set(NanNew<v8::String>("ENCODING_ADOBE_CUSTOM"), NanNew<v8::Integer>(FT_ENCODING_ADOBE_CUSTOM));
+  exports->Set(NanNew<v8::String>("ENCODING_ADOBE_LATIN_1"), NanNew<v8::Integer>(FT_ENCODING_ADOBE_LATIN_1));
+  exports->Set(NanNew<v8::String>("ENCODING_OLD_LATIN_2"), NanNew<v8::Integer>(FT_ENCODING_OLD_LATIN_2));
+  exports->Set(NanNew<v8::String>("ENCODING_APPLE_ROMAN"), NanNew<v8::Integer>(FT_ENCODING_APPLE_ROMAN));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_LOAD_XXX
-  exports->Set(NanSymbol("LOAD_DEFAULT"), v8::Integer::New(FT_LOAD_DEFAULT));
-  exports->Set(NanSymbol("LOAD_NO_SCALE"), v8::Integer::New(FT_LOAD_NO_SCALE));
-  exports->Set(NanSymbol("LOAD_NO_HINTING"), v8::Integer::New(FT_LOAD_NO_HINTING));
-  exports->Set(NanSymbol("LOAD_RENDER"), v8::Integer::New(FT_LOAD_RENDER));
-  exports->Set(NanSymbol("LOAD_NO_BITMAP"), v8::Integer::New(FT_LOAD_NO_BITMAP));
-  exports->Set(NanSymbol("LOAD_VERTICAL_LAYOUT"), v8::Integer::New(FT_LOAD_VERTICAL_LAYOUT));
-  exports->Set(NanSymbol("LOAD_FORCE_AUTOHINT"), v8::Integer::New(FT_LOAD_FORCE_AUTOHINT));
-  exports->Set(NanSymbol("LOAD_CROP_BITMAP"), v8::Integer::New(FT_LOAD_CROP_BITMAP));
-  exports->Set(NanSymbol("LOAD_PEDANTIC"), v8::Integer::New(FT_LOAD_PEDANTIC));
-  exports->Set(NanSymbol("LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH"), v8::Integer::New(FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH));
-  exports->Set(NanSymbol("LOAD_NO_RECURSE"), v8::Integer::New(FT_LOAD_NO_RECURSE));
-  exports->Set(NanSymbol("LOAD_IGNORE_TRANSFORM"), v8::Integer::New(FT_LOAD_IGNORE_TRANSFORM));
-  exports->Set(NanSymbol("LOAD_MONOCHROME"), v8::Integer::New(FT_LOAD_MONOCHROME));
-  exports->Set(NanSymbol("LOAD_LINEAR_DESIGN"), v8::Integer::New(FT_LOAD_LINEAR_DESIGN));
-  exports->Set(NanSymbol("LOAD_NO_AUTOHINT"), v8::Integer::New(FT_LOAD_NO_AUTOHINT));
-  exports->Set(NanSymbol("LOAD_COLOR"), v8::Integer::New(FT_LOAD_COLOR));
+  exports->Set(NanNew<v8::String>("LOAD_DEFAULT"), NanNew<v8::Integer>(FT_LOAD_DEFAULT));
+  exports->Set(NanNew<v8::String>("LOAD_NO_SCALE"), NanNew<v8::Integer>(FT_LOAD_NO_SCALE));
+  exports->Set(NanNew<v8::String>("LOAD_NO_HINTING"), NanNew<v8::Integer>(FT_LOAD_NO_HINTING));
+  exports->Set(NanNew<v8::String>("LOAD_RENDER"), NanNew<v8::Integer>(FT_LOAD_RENDER));
+  exports->Set(NanNew<v8::String>("LOAD_NO_BITMAP"), NanNew<v8::Integer>(FT_LOAD_NO_BITMAP));
+  exports->Set(NanNew<v8::String>("LOAD_VERTICAL_LAYOUT"), NanNew<v8::Integer>(FT_LOAD_VERTICAL_LAYOUT));
+  exports->Set(NanNew<v8::String>("LOAD_FORCE_AUTOHINT"), NanNew<v8::Integer>(FT_LOAD_FORCE_AUTOHINT));
+  exports->Set(NanNew<v8::String>("LOAD_CROP_BITMAP"), NanNew<v8::Integer>(FT_LOAD_CROP_BITMAP));
+  exports->Set(NanNew<v8::String>("LOAD_PEDANTIC"), NanNew<v8::Integer>(FT_LOAD_PEDANTIC));
+  exports->Set(NanNew<v8::String>("LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH"), NanNew<v8::Integer>(FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH));
+  exports->Set(NanNew<v8::String>("LOAD_NO_RECURSE"), NanNew<v8::Integer>(FT_LOAD_NO_RECURSE));
+  exports->Set(NanNew<v8::String>("LOAD_IGNORE_TRANSFORM"), NanNew<v8::Integer>(FT_LOAD_IGNORE_TRANSFORM));
+  exports->Set(NanNew<v8::String>("LOAD_MONOCHROME"), NanNew<v8::Integer>(FT_LOAD_MONOCHROME));
+  exports->Set(NanNew<v8::String>("LOAD_LINEAR_DESIGN"), NanNew<v8::Integer>(FT_LOAD_LINEAR_DESIGN));
+  exports->Set(NanNew<v8::String>("LOAD_NO_AUTOHINT"), NanNew<v8::Integer>(FT_LOAD_NO_AUTOHINT));
+  exports->Set(NanNew<v8::String>("LOAD_COLOR"), NanNew<v8::Integer>(FT_LOAD_COLOR));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_Kerning_Mode
-  exports->Set(NanSymbol("KERNING_DEFAULT"), v8::Integer::New(FT_KERNING_DEFAULT));
-  exports->Set(NanSymbol("KERNING_UNFITTED"), v8::Integer::New(FT_KERNING_UNFITTED));
-  exports->Set(NanSymbol("KERNING_UNSCALED"), v8::Integer::New(FT_KERNING_UNSCALED));
+  exports->Set(NanNew<v8::String>("KERNING_DEFAULT"), NanNew<v8::Integer>(FT_KERNING_DEFAULT));
+  exports->Set(NanNew<v8::String>("KERNING_UNFITTED"), NanNew<v8::Integer>(FT_KERNING_UNFITTED));
+  exports->Set(NanNew<v8::String>("KERNING_UNSCALED"), NanNew<v8::Integer>(FT_KERNING_UNSCALED));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_FACE_FLAG_XXX
-  exports->Set(NanSymbol("FACE_FLAG_SCALABLE"), v8::Integer::New(FT_FACE_FLAG_SCALABLE));
-  exports->Set(NanSymbol("FACE_FLAG_FIXED_SIZES"), v8::Integer::New(FT_FACE_FLAG_FIXED_SIZES));
-  exports->Set(NanSymbol("FACE_FLAG_FIXED_WIDTH"), v8::Integer::New(FT_FACE_FLAG_FIXED_WIDTH));
-  exports->Set(NanSymbol("FACE_FLAG_SFNT"), v8::Integer::New(FT_FACE_FLAG_SFNT));
-  exports->Set(NanSymbol("FACE_FLAG_HORIZONTAL"), v8::Integer::New(FT_FACE_FLAG_HORIZONTAL));
-  exports->Set(NanSymbol("FACE_FLAG_VERTICAL"), v8::Integer::New(FT_FACE_FLAG_VERTICAL));
-  exports->Set(NanSymbol("FACE_FLAG_KERNING"), v8::Integer::New(FT_FACE_FLAG_KERNING));
-  exports->Set(NanSymbol("FACE_FLAG_FAST_GLYPHS"), v8::Integer::New(FT_FACE_FLAG_FAST_GLYPHS));
-  exports->Set(NanSymbol("FACE_FLAG_MULTIPLE_MASTERS"), v8::Integer::New(FT_FACE_FLAG_MULTIPLE_MASTERS));
-  exports->Set(NanSymbol("FACE_FLAG_GLYPH_NAMES"), v8::Integer::New(FT_FACE_FLAG_GLYPH_NAMES));
-  exports->Set(NanSymbol("FACE_FLAG_EXTERNAL_STREAM"), v8::Integer::New(FT_FACE_FLAG_EXTERNAL_STREAM));
-  exports->Set(NanSymbol("FACE_FLAG_HINTER"), v8::Integer::New(FT_FACE_FLAG_HINTER));
-  exports->Set(NanSymbol("FACE_FLAG_CID_KEYED"), v8::Integer::New(FT_FACE_FLAG_CID_KEYED));
-  exports->Set(NanSymbol("FACE_FLAG_TRICKY"), v8::Integer::New(FT_FACE_FLAG_TRICKY));
-  exports->Set(NanSymbol("FACE_FLAG_COLOR"), v8::Integer::New(FT_FACE_FLAG_COLOR));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_SCALABLE"), NanNew<v8::Integer>(FT_FACE_FLAG_SCALABLE));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_FIXED_SIZES"), NanNew<v8::Integer>(FT_FACE_FLAG_FIXED_SIZES));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_FIXED_WIDTH"), NanNew<v8::Integer>(FT_FACE_FLAG_FIXED_WIDTH));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_SFNT"), NanNew<v8::Integer>(FT_FACE_FLAG_SFNT));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_HORIZONTAL"), NanNew<v8::Integer>(FT_FACE_FLAG_HORIZONTAL));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_VERTICAL"), NanNew<v8::Integer>(FT_FACE_FLAG_VERTICAL));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_KERNING"), NanNew<v8::Integer>(FT_FACE_FLAG_KERNING));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_FAST_GLYPHS"), NanNew<v8::Integer>(FT_FACE_FLAG_FAST_GLYPHS));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_MULTIPLE_MASTERS"), NanNew<v8::Integer>(FT_FACE_FLAG_MULTIPLE_MASTERS));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_GLYPH_NAMES"), NanNew<v8::Integer>(FT_FACE_FLAG_GLYPH_NAMES));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_EXTERNAL_STREAM"), NanNew<v8::Integer>(FT_FACE_FLAG_EXTERNAL_STREAM));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_HINTER"), NanNew<v8::Integer>(FT_FACE_FLAG_HINTER));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_CID_KEYED"), NanNew<v8::Integer>(FT_FACE_FLAG_CID_KEYED));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_TRICKY"), NanNew<v8::Integer>(FT_FACE_FLAG_TRICKY));
+  exports->Set(NanNew<v8::String>("FACE_FLAG_COLOR"), NanNew<v8::Integer>(FT_FACE_FLAG_COLOR));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_STYLE_FLAG_XXX
-  exports->Set(NanSymbol("STYLE_FLAG_ITALIC"), v8::Integer::New(FT_STYLE_FLAG_ITALIC));
-  exports->Set(NanSymbol("STYLE_FLAG_BOLD"), v8::Integer::New(FT_STYLE_FLAG_BOLD));
+  exports->Set(NanNew<v8::String>("STYLE_FLAG_ITALIC"), NanNew<v8::Integer>(FT_STYLE_FLAG_ITALIC));
+  exports->Set(NanNew<v8::String>("STYLE_FLAG_BOLD"), NanNew<v8::Integer>(FT_STYLE_FLAG_BOLD));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-basic_types.html#FT_Glyph_Format
-  exports->Set(NanSymbol("GLYPH_FORMAT_NONE"), v8::Integer::New(FT_GLYPH_FORMAT_NONE));
-  exports->Set(NanSymbol("GLYPH_FORMAT_COMPOSITE"), v8::Integer::New(FT_GLYPH_FORMAT_COMPOSITE));
-  exports->Set(NanSymbol("GLYPH_FORMAT_BITMAP"), v8::Integer::New(FT_GLYPH_FORMAT_BITMAP));
-  exports->Set(NanSymbol("GLYPH_FORMAT_OUTLINE"), v8::Integer::New(FT_GLYPH_FORMAT_OUTLINE));
-  exports->Set(NanSymbol("GLYPH_FORMAT_PLOTTER"), v8::Integer::New(FT_GLYPH_FORMAT_PLOTTER));
+  exports->Set(NanNew<v8::String>("GLYPH_FORMAT_NONE"), NanNew<v8::Integer>(FT_GLYPH_FORMAT_NONE));
+  exports->Set(NanNew<v8::String>("GLYPH_FORMAT_COMPOSITE"), NanNew<v8::Integer>(FT_GLYPH_FORMAT_COMPOSITE));
+  exports->Set(NanNew<v8::String>("GLYPH_FORMAT_BITMAP"), NanNew<v8::Integer>(FT_GLYPH_FORMAT_BITMAP));
+  exports->Set(NanNew<v8::String>("GLYPH_FORMAT_OUTLINE"), NanNew<v8::Integer>(FT_GLYPH_FORMAT_OUTLINE));
+  exports->Set(NanNew<v8::String>("GLYPH_FORMAT_PLOTTER"), NanNew<v8::Integer>(FT_GLYPH_FORMAT_PLOTTER));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_Render_Mode
-  exports->Set(NanSymbol("RENDER_MODE_NORMAL"), v8::Integer::New(FT_RENDER_MODE_NORMAL));
-  exports->Set(NanSymbol("RENDER_MODE_LIGHT"), v8::Integer::New(FT_RENDER_MODE_LIGHT));
-  exports->Set(NanSymbol("RENDER_MODE_MONO"), v8::Integer::New(FT_RENDER_MODE_MONO));
-  exports->Set(NanSymbol("RENDER_MODE_LCD"), v8::Integer::New(FT_RENDER_MODE_LCD));
-  exports->Set(NanSymbol("RENDER_MODE_LCD_V"), v8::Integer::New(FT_RENDER_MODE_LCD_V));
-  exports->Set(NanSymbol("RENDER_MODE_MAX"), v8::Integer::New(FT_RENDER_MODE_MAX));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_NORMAL"), NanNew<v8::Integer>(FT_RENDER_MODE_NORMAL));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_LIGHT"), NanNew<v8::Integer>(FT_RENDER_MODE_LIGHT));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_MONO"), NanNew<v8::Integer>(FT_RENDER_MODE_MONO));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_LCD"), NanNew<v8::Integer>(FT_RENDER_MODE_LCD));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_LCD_V"), NanNew<v8::Integer>(FT_RENDER_MODE_LCD_V));
+  exports->Set(NanNew<v8::String>("RENDER_MODE_MAX"), NanNew<v8::Integer>(FT_RENDER_MODE_MAX));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_FSTYPE_XXX
-  exports->Set(NanSymbol("FSTYPE_INSTALLABLE_EMBEDDING"), v8::Integer::New(FT_FSTYPE_INSTALLABLE_EMBEDDING));
-  exports->Set(NanSymbol("FSTYPE_RESTRICTED_LICENSE_EMBEDDING"), v8::Integer::New(FT_FSTYPE_RESTRICTED_LICENSE_EMBEDDING));
-  exports->Set(NanSymbol("FSTYPE_PREVIEW_AND_PRINT_EMBEDDING"), v8::Integer::New(FT_FSTYPE_PREVIEW_AND_PRINT_EMBEDDING));
-  exports->Set(NanSymbol("FSTYPE_EDITABLE_EMBEDDING"), v8::Integer::New(FT_FSTYPE_EDITABLE_EMBEDDING));
-  exports->Set(NanSymbol("FSTYPE_NO_SUBSETTING"), v8::Integer::New(FT_FSTYPE_NO_SUBSETTING));
-  exports->Set(NanSymbol("FSTYPE_BITMAP_EMBEDDING_ONLY"), v8::Integer::New(FT_FSTYPE_BITMAP_EMBEDDING_ONLY));
+  exports->Set(NanNew<v8::String>("FSTYPE_INSTALLABLE_EMBEDDING"), NanNew<v8::Integer>(FT_FSTYPE_INSTALLABLE_EMBEDDING));
+  exports->Set(NanNew<v8::String>("FSTYPE_RESTRICTED_LICENSE_EMBEDDING"), NanNew<v8::Integer>(FT_FSTYPE_RESTRICTED_LICENSE_EMBEDDING));
+  exports->Set(NanNew<v8::String>("FSTYPE_PREVIEW_AND_PRINT_EMBEDDING"), NanNew<v8::Integer>(FT_FSTYPE_PREVIEW_AND_PRINT_EMBEDDING));
+  exports->Set(NanNew<v8::String>("FSTYPE_EDITABLE_EMBEDDING"), NanNew<v8::Integer>(FT_FSTYPE_EDITABLE_EMBEDDING));
+  exports->Set(NanNew<v8::String>("FSTYPE_NO_SUBSETTING"), NanNew<v8::Integer>(FT_FSTYPE_NO_SUBSETTING));
+  exports->Set(NanNew<v8::String>("FSTYPE_BITMAP_EMBEDDING_ONLY"), NanNew<v8::Integer>(FT_FSTYPE_BITMAP_EMBEDDING_ONLY));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-basic_types.html#FT_Pixel_Mode
-  exports->Set(NanSymbol("PIXEL_MODE_NONE"), v8::Integer::New(FT_PIXEL_MODE_NONE));
-  exports->Set(NanSymbol("PIXEL_MODE_MONO"), v8::Integer::New(FT_PIXEL_MODE_MONO));
-  exports->Set(NanSymbol("PIXEL_MODE_GRAY"), v8::Integer::New(FT_PIXEL_MODE_GRAY));
-  exports->Set(NanSymbol("PIXEL_MODE_GRAY2"), v8::Integer::New(FT_PIXEL_MODE_GRAY2));
-  exports->Set(NanSymbol("PIXEL_MODE_GRAY4"), v8::Integer::New(FT_PIXEL_MODE_GRAY4));
-  exports->Set(NanSymbol("PIXEL_MODE_LCD"), v8::Integer::New(FT_PIXEL_MODE_LCD));
-  exports->Set(NanSymbol("PIXEL_MODE_LCD_V"), v8::Integer::New(FT_PIXEL_MODE_LCD_V));
-  exports->Set(NanSymbol("PIXEL_MODE_BGRA"), v8::Integer::New(FT_PIXEL_MODE_BGRA));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_NONE"), NanNew<v8::Integer>(FT_PIXEL_MODE_NONE));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_MONO"), NanNew<v8::Integer>(FT_PIXEL_MODE_MONO));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_GRAY"), NanNew<v8::Integer>(FT_PIXEL_MODE_GRAY));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_GRAY2"), NanNew<v8::Integer>(FT_PIXEL_MODE_GRAY2));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_GRAY4"), NanNew<v8::Integer>(FT_PIXEL_MODE_GRAY4));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_LCD"), NanNew<v8::Integer>(FT_PIXEL_MODE_LCD));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_LCD_V"), NanNew<v8::Integer>(FT_PIXEL_MODE_LCD_V));
+  exports->Set(NanNew<v8::String>("PIXEL_MODE_BGRA"), NanNew<v8::Integer>(FT_PIXEL_MODE_BGRA));
 
   // http://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html#FT_Size_Request_Type
-  exports->Set(NanSymbol("SIZE_REQUEST_TYPE_NOMINAL"), v8::Integer::New(FT_SIZE_REQUEST_TYPE_NOMINAL));
-  exports->Set(NanSymbol("SIZE_REQUEST_TYPE_REAL_DIM"), v8::Integer::New(FT_SIZE_REQUEST_TYPE_REAL_DIM));
-  exports->Set(NanSymbol("SIZE_REQUEST_TYPE_BBOX"), v8::Integer::New(FT_SIZE_REQUEST_TYPE_BBOX));
-  exports->Set(NanSymbol("SIZE_REQUEST_TYPE_CELL"), v8::Integer::New(FT_SIZE_REQUEST_TYPE_CELL));
-  exports->Set(NanSymbol("SIZE_REQUEST_TYPE_SCALES"), v8::Integer::New(FT_SIZE_REQUEST_TYPE_SCALES));
+  exports->Set(NanNew<v8::String>("SIZE_REQUEST_TYPE_NOMINAL"), NanNew<v8::Integer>(FT_SIZE_REQUEST_TYPE_NOMINAL));
+  exports->Set(NanNew<v8::String>("SIZE_REQUEST_TYPE_REAL_DIM"), NanNew<v8::Integer>(FT_SIZE_REQUEST_TYPE_REAL_DIM));
+  exports->Set(NanNew<v8::String>("SIZE_REQUEST_TYPE_BBOX"), NanNew<v8::Integer>(FT_SIZE_REQUEST_TYPE_BBOX));
+  exports->Set(NanNew<v8::String>("SIZE_REQUEST_TYPE_CELL"), NanNew<v8::Integer>(FT_SIZE_REQUEST_TYPE_CELL));
+  exports->Set(NanNew<v8::String>("SIZE_REQUEST_TYPE_SCALES"), NanNew<v8::Integer>(FT_SIZE_REQUEST_TYPE_SCALES));
 }
 
 FreeType2::~FreeType2() {
@@ -157,7 +157,7 @@ NAN_METHOD(FreeType2::New_Memory_Face) {
                      (FT_Long)node::Buffer::Length(args[0]->ToObject()),
                      args[1]->Int32Value(),
                      &ftFace);
-  v8::Handle<v8::Object> faceObj = NanPersistentToLocal(FontFace::constructor)->NewInstance();
+  v8::Handle<v8::Object> faceObj = NanNew(FontFace::constructor)->NewInstance();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(faceObj);
   fontFace->ftFace = ftFace;
   NanReturnValue(faceObj);
@@ -231,7 +231,7 @@ NAN_METHOD(FreeType2::Load_Char) {
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Error err = FT_Load_Char(fontFace->ftFace, args[1]->Int32Value(), args[2]->Int32Value());
-  NanReturnValue(v8::Integer::New(err));
+  NanReturnValue(NanNew<v8::Integer>(err));
 }
 
 NAN_METHOD(FreeType2::Get_Kerning) {
@@ -247,10 +247,10 @@ NAN_METHOD(FreeType2::Get_Kerning) {
                    args[3]->Int32Value(),  //kern_mode
                    &kerning);              //kerning
   if (!err) {
-    v8::Handle<v8::Object>::Cast(args[4])->Set(NanSymbol("x"), v8::Integer::New(kerning.x));
-    v8::Handle<v8::Object>::Cast(args[4])->Set(NanSymbol("y"), v8::Integer::New(kerning.y));
+    v8::Handle<v8::Object>::Cast(args[4])->Set(NanNew<v8::String>("x"), NanNew<v8::Integer>(kerning.x));
+    v8::Handle<v8::Object>::Cast(args[4])->Set(NanNew<v8::String>("y"), NanNew<v8::Integer>(kerning.y));
   }
-  NanReturnValue(v8::Integer::New(err));
+  NanReturnValue(NanNew<v8::Integer>(err));
 }
 
 NAN_METHOD(FreeType2::Render_Glyph) {
@@ -289,7 +289,7 @@ NAN_METHOD(FreeType2::Get_Charmap_Index) {
     NanReturnUndefined();
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
-  NanReturnValue(v8::Integer::New(FT_Get_Charmap_Index(fontFace->ftFace->charmap)));
+  NanReturnValue(NanNew<v8::Integer>(FT_Get_Charmap_Index(fontFace->ftFace->charmap)));
 }
 
 NAN_METHOD(FreeType2::Get_Char_Index) {
@@ -298,7 +298,7 @@ NAN_METHOD(FreeType2::Get_Char_Index) {
 	NanReturnUndefined();
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
-  NanReturnValue(v8::Integer::New(FT_Get_Char_Index(fontFace->ftFace, args[1]->Int32Value())));
+  NanReturnValue(NanNew<v8::Integer>(FT_Get_Char_Index(fontFace->ftFace, args[1]->Int32Value())));
 }
 
 NAN_METHOD(FreeType2::Get_First_Char) {
@@ -309,8 +309,8 @@ NAN_METHOD(FreeType2::Get_First_Char) {
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_UInt gindex;
   FT_ULong charcode = FT_Get_First_Char(fontFace->ftFace, &gindex);
-  v8::Handle<v8::Object>::Cast(args[1])->Set(NanSymbol("gindex"), v8::Integer::New(gindex));
-  NanReturnValue(v8::Integer::New(charcode));
+  v8::Handle<v8::Object>::Cast(args[1])->Set(NanNew<v8::String>("gindex"), NanNew<v8::Integer>(gindex));
+  NanReturnValue(NanNew<v8::Integer>(charcode));
 }
 
 NAN_METHOD(FreeType2::Get_Next_Char) {
@@ -321,8 +321,8 @@ NAN_METHOD(FreeType2::Get_Next_Char) {
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_UInt gindex;
   FT_ULong charcode = FT_Get_Next_Char(fontFace->ftFace, args[1]->Int32Value(), &gindex);
-  v8::Handle<v8::Object>::Cast(args[2])->Set(NanSymbol("gindex"), v8::Integer::New(gindex));
-  NanReturnValue(v8::Integer::New(charcode));
+  v8::Handle<v8::Object>::Cast(args[2])->Set(NanNew<v8::String>("gindex"), NanNew<v8::Integer>(gindex));
+  NanReturnValue(NanNew<v8::Integer>(charcode));
 }
 
 typedef struct OutlineContext {
@@ -350,14 +350,14 @@ NAN_METHOD(FreeType2::Outline_Decompose) {
   FT_Glyph glyph;
   FT_Error getErr = FT_Get_Glyph( fontFace->ftFace->glyph, &glyph );
   if (getErr) {
-    NanReturnValue(v8::Integer::New(getErr));  
+    NanReturnValue(NanNew<v8::Integer>(getErr));  
   } else if (fontFace->ftFace->glyph->format != FT_GLYPH_FORMAT_OUTLINE) {
-    NanReturnValue(v8::Integer::New(1)); //error, font doesn't have outline format
+    NanReturnValue(NanNew<v8::Integer>(1)); //error, font doesn't have outline format
   } else {
     FT_OutlineGlyph outline_glyph = (FT_OutlineGlyph)glyph;
     FT_Error outErr = FT_Outline_Decompose(&outline_glyph->outline, &outline_funcs, &context );
     FT_Done_Glyph( glyph );
-    NanReturnValue(v8::Integer::New(outErr));
+    NanReturnValue(NanNew<v8::Integer>(outErr));
   }
 }
 
@@ -367,7 +367,7 @@ NAN_METHOD(FreeType2::Get_Sfnt_Name_Count) {
     NanReturnUndefined();
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
-  NanReturnValue(v8::Integer::New(FT_Get_Sfnt_Name_Count(fontFace->ftFace)));
+  NanReturnValue(NanNew<v8::Integer>(FT_Get_Sfnt_Name_Count(fontFace->ftFace)));
 }
 
 NAN_METHOD(FreeType2::Get_Sfnt_Name) {
@@ -381,15 +381,15 @@ NAN_METHOD(FreeType2::Get_Sfnt_Name) {
   if (FT_Get_Sfnt_Name(fontFace->ftFace, index, &data) == FT_Err_Ok) {
     v8::Local<v8::String> name = v8::String::NewFromOneByte(v8::Isolate::GetCurrent(), 
                                                             data.string, 
-                                                            v8::String::NewStringType::kNormalString, 
+															v8::String::NewStringType::kNormalString,
                                                             data.string_len);
 
-    v8::Handle<v8::Object> retval = v8::Object::New();
-    retval->Set(NanSymbol("platform_id"), v8::Integer::New(data.platform_id));
-    retval->Set(NanSymbol("encoding_id"), v8::Integer::New(data.encoding_id));
-    retval->Set(NanSymbol("language_id"), v8::Integer::New(data.language_id));
-    retval->Set(NanSymbol("name_id"), v8::Integer::New(data.name_id));
-    retval->Set(NanSymbol("string"), name);
+	v8::Handle<v8::Object> retval = NanNew<v8::Object>();
+    retval->Set(NanNew<v8::String>("platform_id"), NanNew<v8::Integer>(data.platform_id));
+    retval->Set(NanNew<v8::String>("encoding_id"), NanNew<v8::Integer>(data.encoding_id));
+    retval->Set(NanNew<v8::String>("language_id"), NanNew<v8::Integer>(data.language_id));
+    retval->Set(NanNew<v8::String>("name_id"), NanNew<v8::Integer>(data.name_id));
+    retval->Set(NanNew<v8::String>("string"), name);
     NanReturnValue(retval);
   }
   NanReturnNull();
@@ -424,9 +424,9 @@ NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
                                                                 data.string, 
                                                                 v8::String::NewStringType::kNormalString, 
                                                                 data.string_len);
-        v8::Handle<v8::Object> retval = v8::Object::New();
-        retval->Set(v8::String::New("encoding"), v8::String::New("ucs2"));
-        retval->Set(v8::String::New("name"), name);
+		v8::Handle<v8::Object> retval = NanNew<v8::Object>();
+        retval->Set(NanNew<v8::String>("encoding"), NanNew<v8::String>("ucs2"));
+        retval->Set(NanNew<v8::String>("name"), name);
         NanReturnValue(retval);
       }
 
@@ -437,9 +437,9 @@ NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
                                                                 data.string, 
                                                                 v8::String::NewStringType::kNormalString, 
                                                                 data.string_len);
-        v8::Handle<v8::Object> retval = v8::Object::New();
-        retval->Set(v8::String::New("encoding"), v8::String::New("ascii"));
-        retval->Set(v8::String::New("name"), name);
+		v8::Handle<v8::Object> retval = NanNew<v8::Object>();
+        retval->Set(NanNew<v8::String>("encoding"), NanNew<v8::String>("ascii"));
+        retval->Set(NanNew<v8::String>("name"), name);
         NanReturnValue(retval);
       }
     }
@@ -455,20 +455,20 @@ int FreeType2::move_to(const FT_Vector* to, void *p) {
   OutlineContext *context = (OutlineContext*)p;
 
   v8::Handle<v8::Object> funcs = v8::Handle<v8::Object>::Cast(context->functions);
-  if (funcs->IsObject() && funcs->Has(NanSymbol("move_to"))) {
-    v8::Handle<v8::Value> fn = funcs->Get(NanSymbol("move_to"));
+  if (funcs->IsObject() && funcs->Has(NanNew<v8::String>("move_to"))) {
+    v8::Handle<v8::Value> fn = funcs->Get(NanNew<v8::String>("move_to"));
     if (!fn->IsFunction()) {
-      v8::ThrowException(v8::String::New("move_to for Outline_Decompose must be a function"));
+      NanThrowError(("move_to for Outline_Decompose must be a function"));
       return 1;
     }
     v8::Handle<v8::Value> args[2];
-    args[0] = v8::Integer::New(to->x);
-    args[1] = v8::Integer::New(to->y);
+    args[0] = NanNew<v8::Integer>(to->x);
+    args[1] = NanNew<v8::Integer>(to->y);
 
-    v8::Handle<v8::Function>::Cast(fn)->Call( v8::Context::GetCurrent()->Global(), 2, args );
+	v8::Handle<v8::Function>::Cast(fn)->Call(NanGetCurrentContext()->Global(), 2, args);
     return 0;
   } else {
-    v8::ThrowException(v8::String::New("must define a move_to() function for Outline_Decompose"));
+    NanThrowError(("must define a move_to() function for Outline_Decompose"));
     return 1;
   }
 }
@@ -477,20 +477,20 @@ int FreeType2::line_to(const FT_Vector* to, void *p) {
   OutlineContext *context = (OutlineContext*)p;
   
   v8::Handle<v8::Object> funcs = v8::Handle<v8::Object>::Cast(context->functions);
-  if (funcs->IsObject() && funcs->Has(NanSymbol("line_to"))) {
-    v8::Handle<v8::Value> fn = funcs->Get(NanSymbol("line_to"));
+  if (funcs->IsObject() && funcs->Has(NanNew<v8::String>("line_to"))) {
+    v8::Handle<v8::Value> fn = funcs->Get(NanNew<v8::String>("line_to"));
     if (!fn->IsFunction()) {
-      v8::ThrowException(v8::String::New("line_to for Outline_Decompose must be a function"));
+      NanThrowError(("line_to for Outline_Decompose must be a function"));
       return 1;
     }
     v8::Handle<v8::Value> args[2];
-    args[0] = v8::Integer::New(to->x);
-    args[1] = v8::Integer::New(to->y);
+    args[0] = NanNew<v8::Integer>(to->x);
+    args[1] = NanNew<v8::Integer>(to->y);
 
-    v8::Handle<v8::Function>::Cast(fn)->Call( v8::Context::GetCurrent()->Global(), 2, args );
+    v8::Handle<v8::Function>::Cast(fn)->Call( NanGetCurrentContext()->Global(), 2, args );
     return 0;
   } else {
-    v8::ThrowException(v8::String::New("must define a line_to() function for Outline_Decompose"));
+    NanThrowError(("must define a line_to() function for Outline_Decompose"));
     return 1;
   }
 }
@@ -499,22 +499,22 @@ int FreeType2::quad_to(const FT_Vector*  cp, const FT_Vector*  to, void *p) {
   OutlineContext *context = (OutlineContext*)p;
   
   v8::Handle<v8::Object> funcs = v8::Handle<v8::Object>::Cast(context->functions);
-  if (funcs->IsObject() && funcs->Has(NanSymbol("quad_to"))) {
-    v8::Handle<v8::Value> fn = funcs->Get(NanSymbol("quad_to"));
+  if (funcs->IsObject() && funcs->Has(NanNew<v8::String>("quad_to"))) {
+    v8::Handle<v8::Value> fn = funcs->Get(NanNew<v8::String>("quad_to"));
     if (!fn->IsFunction()) {
-      v8::ThrowException(v8::String::New("quad_to for Outline_Decompose must be a function"));
+      NanThrowError(("quad_to for Outline_Decompose must be a function"));
       return 1;
     }
     v8::Handle<v8::Value> args[4];
-    args[0] = v8::Integer::New(cp->x);
-    args[1] = v8::Integer::New(cp->y);
-    args[2] = v8::Integer::New(to->x);
-    args[3] = v8::Integer::New(to->y);
+    args[0] = NanNew<v8::Integer>(cp->x);
+    args[1] = NanNew<v8::Integer>(cp->y);
+    args[2] = NanNew<v8::Integer>(to->x);
+    args[3] = NanNew<v8::Integer>(to->y);
 
-    v8::Handle<v8::Function>::Cast(fn)->Call( v8::Context::GetCurrent()->Global(), 4, args );
+    v8::Handle<v8::Function>::Cast(fn)->Call( NanGetCurrentContext()->Global(), 4, args );
     return 0;
   } else {
-    v8::ThrowException(v8::String::New("must define a quad_to() function for Outline_Decompose"));
+    NanThrowError(("must define a quad_to() function for Outline_Decompose"));
     return 1;
   }
 }
@@ -525,24 +525,24 @@ int FreeType2::cubic_to(const FT_Vector*  cp1,
          void *p) {
   OutlineContext *context = (OutlineContext*)p;
   v8::Handle<v8::Object> funcs = v8::Handle<v8::Object>::Cast(context->functions);
-  if (funcs->IsObject() && funcs->Has(NanSymbol("cubic_to"))) {
-    v8::Handle<v8::Value> fn = funcs->Get(NanSymbol("cubic_to"));
+  if (funcs->IsObject() && funcs->Has(NanNew<v8::String>("cubic_to"))) {
+    v8::Handle<v8::Value> fn = funcs->Get(NanNew<v8::String>("cubic_to"));
     if (!fn->IsFunction()) {
-      v8::ThrowException(v8::String::New("cubic_to for Outline_Decompose must be a function"));
+      NanThrowError(("cubic_to for Outline_Decompose must be a function"));
       return 1;
     }
     v8::Handle<v8::Value> args[6];
-    args[0] = v8::Integer::New(cp1->x);
-    args[1] = v8::Integer::New(cp1->y);
-    args[2] = v8::Integer::New(cp2->x);
-    args[3] = v8::Integer::New(cp2->y);
-    args[4] = v8::Integer::New(to->x);
-    args[5] = v8::Integer::New(to->y);
+    args[0] = NanNew<v8::Integer>(cp1->x);
+    args[1] = NanNew<v8::Integer>(cp1->y);
+    args[2] = NanNew<v8::Integer>(cp2->x);
+    args[3] = NanNew<v8::Integer>(cp2->y);
+    args[4] = NanNew<v8::Integer>(to->x);
+    args[5] = NanNew<v8::Integer>(to->y);
 
-    v8::Handle<v8::Function>::Cast(fn)->Call( v8::Context::GetCurrent()->Global(), 6, args );
+    v8::Handle<v8::Function>::Cast(fn)->Call( NanGetCurrentContext()->Global(), 6, args );
     return 0;
   } else {
-    v8::ThrowException(v8::String::New("must define a cubic_to() function for Outline_Decompose"));
+    NanThrowError(("must define a cubic_to() function for Outline_Decompose"));
     return 1;
   }
 }
