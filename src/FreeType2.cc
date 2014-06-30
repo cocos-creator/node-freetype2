@@ -167,7 +167,6 @@ NAN_METHOD(FreeType2::Select_Size) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Select_Size(fontFace->ftFace, args[1]->Int32Value());
@@ -178,7 +177,6 @@ NAN_METHOD(FreeType2::Request_Size) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Size_RequestRec req = {
@@ -196,7 +194,6 @@ NAN_METHOD(FreeType2::Set_Char_Size) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Set_Char_Size(fontFace->ftFace,
@@ -211,7 +208,6 @@ NAN_METHOD(FreeType2::Set_Pixel_Sizes) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Set_Pixel_Sizes(fontFace->ftFace, args[1]->Uint32Value(), args[2]->Uint32Value());
@@ -222,7 +218,6 @@ NAN_METHOD(FreeType2::Load_Glyph) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Load_Glyph(fontFace->ftFace, args[1]->Int32Value(), args[2]->Int32Value());
@@ -233,7 +228,6 @@ NAN_METHOD(FreeType2::Load_Char) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Error err = FT_Load_Char(fontFace->ftFace, args[1]->Int32Value(), args[2]->Int32Value());
@@ -244,7 +238,6 @@ NAN_METHOD(FreeType2::Get_Kerning) {
   NanScope();
   if (args[0]->IsUndefined() || args[4]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Vector kerning;
@@ -264,7 +257,6 @@ NAN_METHOD(FreeType2::Render_Glyph) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   Glyph* glyph = node::ObjectWrap::Unwrap<Glyph>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Render_Glyph(glyph->ftGlyph, static_cast<FT_Render_Mode>(args[1]->Int32Value()));
@@ -275,7 +267,6 @@ NAN_METHOD(FreeType2::Select_Charmap) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Select_Charmap(fontFace->ftFace, static_cast<FT_Encoding>(args[1]->Int32Value()));
@@ -286,7 +277,6 @@ NAN_METHOD(FreeType2::Set_Charmap) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_Set_Charmap(fontFace->ftFace, fontFace->ftFace->charmaps[args[1]->Int32Value()]);
@@ -297,7 +287,6 @@ NAN_METHOD(FreeType2::Get_Charmap_Index) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   NanReturnValue(v8::Integer::New(FT_Get_Charmap_Index(fontFace->ftFace->charmap)));
@@ -307,7 +296,6 @@ NAN_METHOD(FreeType2::Get_Char_Index) {
   NanScope();
   if (args[0]->IsUndefined()) {
 	NanReturnUndefined();
-	return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   NanReturnValue(v8::Integer::New(FT_Get_Char_Index(fontFace->ftFace, args[1]->Int32Value())));
@@ -317,7 +305,6 @@ NAN_METHOD(FreeType2::Get_First_Char) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_UInt gindex;
@@ -330,7 +317,6 @@ NAN_METHOD(FreeType2::Get_Next_Char) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   FT_UInt gindex;
@@ -347,7 +333,6 @@ NAN_METHOD(FreeType2::Outline_Decompose) {
   NanScope();
   if (args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   
@@ -380,7 +365,6 @@ NAN_METHOD(FreeType2::Get_Sfnt_Name_Count) {
   NanScope();
   if (args.Length() < 1 || args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   NanReturnValue(v8::Integer::New(FT_Get_Sfnt_Name_Count(fontFace->ftFace)));
@@ -390,7 +374,6 @@ NAN_METHOD(FreeType2::Get_Sfnt_Name) {
   NanScope();
   if (args.Length() < 2 || args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   int index = args[1]->Int32Value();
@@ -416,7 +399,6 @@ NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
   NanScope();
   if (args.Length() < 3 || args[0]->IsUndefined()) {
     NanReturnUndefined();
-    return;
   }
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(v8::Handle<v8::Object>::Cast(args[0]));
   int platformId = args[1]->Int32Value();
@@ -446,7 +428,6 @@ NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
         retval->Set(v8::String::New("encoding"), v8::String::New("ucs2"));
         retval->Set(v8::String::New("name"), name);
         NanReturnValue(retval);
-        return;
       }
 
       bool isAscii = (data.platform_id == TT_PLATFORM_MACINTOSH && data.encoding_id == TT_MAC_ID_ROMAN)
@@ -460,7 +441,6 @@ NAN_METHOD(FreeType2::Get_Sfnt_Full_Name) {
         retval->Set(v8::String::New("encoding"), v8::String::New("ascii"));
         retval->Set(v8::String::New("name"), name);
         NanReturnValue(retval);
-        return;
       }
     }
   }
