@@ -53,31 +53,31 @@ FontFace::~FontFace() {
 NAN_GETTER(FontFace::acc_num_faces) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->num_faces));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->num_faces));
 }
 
 NAN_GETTER(FontFace::acc_face_index) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->face_index));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->face_index));
 }
 
 NAN_GETTER(FontFace::acc_face_flags) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->face_flags));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->face_flags));
 }
 
 NAN_GETTER(FontFace::acc_style_flags) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->style_flags));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->style_flags));
 }
 
 NAN_GETTER(FontFace::acc_num_glyphs) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->num_glyphs));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->num_glyphs));
 }
 
 NAN_GETTER(FontFace::acc_family_name) {
@@ -95,7 +95,7 @@ NAN_GETTER(FontFace::acc_style_name) {
 NAN_GETTER(FontFace::acc_num_fixed_sizes) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->num_fixed_sizes));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->num_fixed_sizes));
 }
 
 NAN_GETTER(FontFace::acc_available_sizes) {
@@ -117,7 +117,7 @@ NAN_GETTER(FontFace::acc_available_sizes) {
 NAN_GETTER(FontFace::acc_num_charmaps) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->num_charmaps));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->num_charmaps));
 }
 
 NAN_GETTER(FontFace::acc_charmaps) {
@@ -126,9 +126,9 @@ NAN_GETTER(FontFace::acc_charmaps) {
   v8::Handle<v8::Array> charmaps = NanNew<v8::Array>(fontFace->ftFace->num_charmaps);
   for (int i = 0; i < fontFace->ftFace->num_charmaps; i++) {
     v8::Handle<v8::Object> charmap = NanNew<v8::Object>();
-    charmap->Set(NanSymbol("encoding"), NanNew(fontFace->ftFace->charmaps[i]->encoding));
-    charmap->Set(NanSymbol("platform_id"), NanNew(fontFace->ftFace->charmaps[i]->platform_id));
-    charmap->Set(NanSymbol("encoding_id"), NanNew(fontFace->ftFace->charmaps[i]->encoding_id));
+    charmap->Set(NanSymbol("encoding"), NanNew<v8::Number>(fontFace->ftFace->charmaps[i]->encoding));
+    charmap->Set(NanSymbol("platform_id"), NanNew<v8::Number>(fontFace->ftFace->charmaps[i]->platform_id));
+    charmap->Set(NanSymbol("encoding_id"), NanNew<v8::Number>(fontFace->ftFace->charmaps[i]->encoding_id));
     charmaps->Set(i, charmap);
   }
   NanReturnValue(charmaps);
@@ -138,59 +138,59 @@ NAN_GETTER(FontFace::acc_bbox) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
   v8::Handle<v8::Object> bbox = NanNew<v8::Object>();
-  bbox->Set(NanSymbol("xMin"), NanNew(fontFace->ftFace->bbox.xMin));
-  bbox->Set(NanSymbol("xMax"), NanNew(fontFace->ftFace->bbox.xMax));
-  bbox->Set(NanSymbol("yMin"), NanNew(fontFace->ftFace->bbox.yMin));
-  bbox->Set(NanSymbol("yMax"), NanNew(fontFace->ftFace->bbox.yMax));
+  bbox->Set(NanSymbol("xMin"), NanNew<v8::Number>(fontFace->ftFace->bbox.xMin));
+  bbox->Set(NanSymbol("xMax"), NanNew<v8::Number>(fontFace->ftFace->bbox.xMax));
+  bbox->Set(NanSymbol("yMin"), NanNew<v8::Number>(fontFace->ftFace->bbox.yMin));
+  bbox->Set(NanSymbol("yMax"), NanNew<v8::Number>(fontFace->ftFace->bbox.yMax));
   NanReturnValue(bbox);
 }
 
 NAN_GETTER(FontFace::acc_units_per_EM) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->units_per_EM));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->units_per_EM));
 }
 
 NAN_GETTER(FontFace::acc_ascender) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->ascender));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->ascender));
 }
 
 NAN_GETTER(FontFace::acc_descender) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->descender));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->descender));
 }
 
 NAN_GETTER(FontFace::acc_height) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->height));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->height));
 }
 
 NAN_GETTER(FontFace::acc_max_advance_width) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->max_advance_width));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->max_advance_width));
 }
 
 NAN_GETTER(FontFace::acc_max_advance_height) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->max_advance_height));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->max_advance_height));
 }
 
 NAN_GETTER(FontFace::acc_underline_position) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->underline_position));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->underline_position));
 }
 
 NAN_GETTER(FontFace::acc_underline_thickness) {
   NanScope();
   FontFace* fontFace = node::ObjectWrap::Unwrap<FontFace>(args.This());
-  NanReturnValue(NanNew(fontFace->ftFace->underline_thickness));
+  NanReturnValue(NanNew<v8::Number>(fontFace->ftFace->underline_thickness));
 }
 
 NAN_GETTER(FontFace::acc_glyph) {

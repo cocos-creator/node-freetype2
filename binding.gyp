@@ -11,9 +11,17 @@
         'src/FontFace.cc',
         'src/Glyph.cc',
       ],
-      "include_dirs" : [
+      'include_dirs' : [
         "<!(node -e \"require('nan')\")"
+      ],
+      'conditions': [
+          [ 'OS=="mac"', {
+              'xcode_settings': {
+                  'OTHER_CPLUSPLUSFLAGS' : ['-std=c++11', '-Wno-c++11-narrowing'],
+              },
+          }],
       ],
     }
   ]
 }
+
